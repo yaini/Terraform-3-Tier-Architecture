@@ -5,7 +5,7 @@ resource "aws_subnet" "public_subnets" {
   availability_zone       = data.aws_availability_zones.availability_zones.names[count.index]
   map_public_ip_on_launch = true
 
-  tags                    = var.tags
+  tags = var.tags
 }
 
 resource "aws_subnet" "private_subnets_application" {
@@ -15,7 +15,7 @@ resource "aws_subnet" "private_subnets_application" {
   availability_zone       = data.aws_availability_zones.availability_zones.names[count.index]
   map_public_ip_on_launch = false
 
-  tags                    = var.tags
+  tags = var.tags
 }
 
 resource "aws_subnet" "private_subnets_data" {
@@ -25,5 +25,5 @@ resource "aws_subnet" "private_subnets_data" {
   availability_zone       = data.aws_availability_zones.availability_zones.names[count.index]
   map_public_ip_on_launch = false
 
-  tags                    = var.tags
+  tags = var.tags
 }
