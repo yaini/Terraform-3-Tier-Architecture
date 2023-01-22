@@ -8,4 +8,7 @@ variable "private_subnet_data_count" {}
 
 variable "access_ip" {}
 
+variable "instance_type" {}
+variable "ec2_key_pair_name" {}
+
 variable "tags" {}
