@@ -1,13 +1,13 @@
 resource "aws_network_acl" "public_network_acl" {
   vpc_id     = aws_vpc.vpc.id
-  subnet_ids = [aws_subnet.public_subnets.*.id]
+  subnet_ids = aws_subnet.public_subnets.*.id
 
   tags = var.tags
 }
 
 resource "aws_network_acl" "private_network_acl" {
   vpc_id     = aws_vpc.vpc.id
-  subnet_ids = [aws_subnet.private_subnets_application.*.id]
+  subnet_ids = aws_subnet.private_subnets_application.*.id
 
   tags = var.tags
 }
