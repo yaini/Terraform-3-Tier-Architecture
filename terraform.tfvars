@@ -6,7 +6,9 @@ public_subnet_count              = 2
 private_subnet_application_count = 2
 private_subnet_data_count        = 2
 
-instance_type     = "t2.micro"
+instance_type           = "t2.micro"
+database_instance_class = "db.t2.micro"
+
 ec2_key_pair_name = "key_pair"
 
 tags = {
