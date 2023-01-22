@@ -15,6 +15,7 @@ resource "aws_launch_template" "application" {
   image_id               = data.aws_ami.amazon_linux.id
   vpc_security_group_ids = aws_security_group.application_security_group.*.id
   key_name               = var.ec2_key_pair_name
+  user_data              = filebase64("./script/install_apache.sh")
 
   tags = var.tags
 }
