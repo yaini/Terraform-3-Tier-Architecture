@@ -1,5 +1,6 @@
 # Terraform 3-Tier Architecture
 ## 📜 Overview
+![image](https://user-images.githubusercontent.com/80642154/214268597-61ae411c-c360-4590-91a6-5de67f56964e.png)
 
 ### Resource
 * VPC - Virtual Private Cloud
