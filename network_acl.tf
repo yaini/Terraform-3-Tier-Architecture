@@ -65,7 +65,7 @@ resource "aws_network_acl_rule" "public_network_acl_ingress_ssh" {
   protocol       = "tcp"
   from_port      = 22
   to_port        = 22
-  cidr_block     = var.entire_cidr_block
+  cidr_block     = var.access_ip
 }
 
 resource "aws_network_acl_rule" "public_network_acl_egress_ssh" {
