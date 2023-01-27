@@ -88,9 +88,3 @@ resource "aws_security_group" "rds_security_group" {
     cidr_blocks = [var.entire_cidr_block]
   }
 }
-
-resource "aws_db_subnet_group" "private_db_subnet_group" {
-  subnet_ids = aws_subnet.private_subnets_data.*.id
-
-  tags = var.tags
-}

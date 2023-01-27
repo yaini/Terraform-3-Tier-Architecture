@@ -27,3 +27,9 @@ resource "aws_subnet" "private_subnets_data" {
 
   tags = var.tags
 }
+
+data "aws_availability_zones" "availability_zones" {
+  state = "available"
+
+  exclude_names = ["ap-northeast-2b", "ap-northeast-2d"]
+}

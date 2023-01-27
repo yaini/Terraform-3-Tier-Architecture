@@ -1,6 +1,6 @@
 resource "aws_lb" "loadbalancer" {
-  security_groups = tolist([aws_security_group.lb_security_group.id])
-  subnets         = aws_subnet.public_subnets.*.id
+  security_groups = tolist([module.network.lb_security_group.id])
+  subnets         = module.network.public_subnets.*.id
   idle_timeout    = 400
 
   depends_on = [
@@ -11,7 +11,7 @@ resource "aws_lb" "loadbalancer" {
 resource "aws_lb_target_group" "loadbalancer_target_group" {
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.vpc.id
+  vpc_id   = module.network.vpc.id
 
   lifecycle {
     create_before_destroy = true
