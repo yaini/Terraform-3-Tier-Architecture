@@ -22,6 +22,7 @@ resource "aws_launch_template" "application" {
 
 # auto scaling group
 resource "aws_autoscaling_group" "autoscaling_group_bastion" {
+  name                = "autoscaling_group_bastion"
   vpc_zone_identifier = module.network.public_subnets.*.id
   min_size            = 1
   max_size            = 1
@@ -34,12 +35,13 @@ resource "aws_autoscaling_group" "autoscaling_group_bastion" {
 }
 
 resource "aws_autoscaling_group" "autoscaling_group_application" {
+  name                = "autoscaling_group_application"
   vpc_zone_identifier = module.network.private_subnets_application.*.id
   min_size            = 2
   max_size            = 3
   desired_capacity    = 2
 
-  target_group_arns = tolist([aws_lb_target_group.loadbalancer_target_group.arn])
+  target_group_arns = tolist([aws_lb_target_group.application_loadbalancer_target_group.arn])
 
   launch_template {
     id      = aws_launch_template.application.id
@@ -49,7 +51,7 @@ resource "aws_autoscaling_group" "autoscaling_group_application" {
 
 resource "aws_autoscaling_attachment" "autoscaling_group_application_attachment" {
   autoscaling_group_name = aws_autoscaling_group.autoscaling_group_application.id
-  lb_target_group_arn    = aws_lb_target_group.loadbalancer_target_group.arn
+  lb_target_group_arn    = aws_lb_target_group.application_loadbalancer_target_group.arn
 }
 
 data "aws_ami" "amazon_linux" {
