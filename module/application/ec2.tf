@@ -1,20 +1,20 @@
 # launch template
 resource "aws_launch_template" "bastion" {
   name_prefix            = "bastion"
-  instance_type          = var.instance_type
+  instance_type          = local.instance_type
   image_id               = data.aws_ami.amazon_linux.id
-  vpc_security_group_ids = module.network.bastion_security_group.*.id
-  key_name               = var.ec2_key_pair_name
+  vpc_security_group_ids = var.bastion_security_group_ids
+  key_name               = local.ec2_key_pair_name
 
   tags = var.tags
 }
 
 resource "aws_launch_template" "application" {
   name_prefix            = "application"
-  instance_type          = var.instance_type
+  instance_type          = local.instance_type
   image_id               = data.aws_ami.amazon_linux.id
-  vpc_security_group_ids = module.network.application_security_group.*.id
-  key_name               = var.ec2_key_pair_name
+  vpc_security_group_ids = var.application_security_group_ids
+  key_name               = local.ec2_key_pair_name
   user_data              = filebase64("./script/install_apache.sh")
 
   tags = var.tags
@@ -22,8 +22,8 @@ resource "aws_launch_template" "application" {
 
 # auto scaling group
 resource "aws_autoscaling_group" "autoscaling_group_bastion" {
-  name                = "autoscaling_group_bastion"
-  vpc_zone_identifier = module.network.public_subnets.*.id
+  name                = "autoscaling-group-bastion"
+  vpc_zone_identifier = var.public_subnet_ids
   min_size            = 1
   max_size            = 1
   desired_capacity    = 1
@@ -35,8 +35,8 @@ resource "aws_autoscaling_group" "autoscaling_group_bastion" {
 }
 
 resource "aws_autoscaling_group" "autoscaling_group_application" {
-  name                = "autoscaling_group_application"
-  vpc_zone_identifier = module.network.private_subnets_application.*.id
+  name                = "autoscaling-group-application"
+  vpc_zone_identifier = var.private_subnet_ids
   min_size            = 2
   max_size            = 3
   desired_capacity    = 2

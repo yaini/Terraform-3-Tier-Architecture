@@ -1,3 +1,0 @@
-module "network" {
-  source = "../network"
-}

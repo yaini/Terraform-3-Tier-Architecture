@@ -14,6 +14,28 @@
 * ALB - Application Load Balancer
 * RDS - Relational Database Service
 
+### Directory
+```sh
+├── backend
+├── dev
+└── module
+ 	 ├── application
+ 	 │	 ├── alb.tf
+ 	 │	 ├── ec2.tf
+ 	 ├── data
+ 	 │	 ├── rds.tf
+ 	 │	 └── subnet_group.tf
+ 	 └── network
+ 	     ├── internet_gateway.tf
+ 	     ├── nat_gateway.tf
+ 	     ├── network_acl.tf
+ 	     ├── route_table.tf
+ 	     ├── security_group.tf
+ 	     ├── subnet.tf
+ 	     └── vpc.tf
+```
+
+
 ## 🎯 Usage
 ### Create key_pair
 ```bash
@@ -23,15 +45,13 @@ $ chmod 400 ~/.ssh/key_pair.pem
 
 ### Apply
 ```bash
+$ cd dev
 $ terraform init
 $ terraform plan
 $ terraform apply
-var.access_ip
-  Enter a value: {your_ip}
-
 var.database_password
   Enter a value: {your_database_password}
-
+  
 ...
 
 Apply complete! Resources: 47 added, 0 changed, 0 destroyed.
