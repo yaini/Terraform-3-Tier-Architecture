@@ -16,5 +16,19 @@ locals {
     ]
   }
 
+  container_definition = {
+    name      = "ecs-container-definition"
+    image     = aws_ecr_repository.ecr.repository_url
+    cpu       = 2
+    memory    = 2048
+    essential = true
+    portMappings = [
+      {
+        containerPort = 80
+        hostPort      = 80
+      }
+    ]
+  }
+
   entire_cidr_block = "0.0.0.0/0"
 }
