@@ -1,5 +1,4 @@
-variable "vpc_id" {}
-variable "subnet_ids" {}
+variable "database_password" {}
 
 variable "tags" {
   default = {

@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "ecr" {
-  name                 = "ecr"
+  name                 = "3-tier-repository"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

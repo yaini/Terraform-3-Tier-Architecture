@@ -17,10 +17,10 @@ locals {
   }
 
   container_definition = {
-    name      = "ecs-container-definition"
+    name      = "3-tier-ecs-container"
     image     = aws_ecr_repository.ecr.repository_url
     cpu       = 2
-    memory    = 2048
+    memory    = 256
     essential = true
     portMappings = [
       {
