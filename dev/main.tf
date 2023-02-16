@@ -1,5 +1,6 @@
 module "network" {
-  source = "../module/network"
+  source      = "../module/network"
+  environment = var.environment
 }
 
 module "data" {
@@ -7,6 +8,7 @@ module "data" {
   security_group_ids = module.network.rds_security_group_ids
   subnet_ids         = module.network.private_subnets_data_ids
   database_password  = var.database_password
+  environment        = var.environment
 }
 
 module "application" {
@@ -17,4 +19,5 @@ module "application" {
   application_security_group_ids = module.network.application_security_group_ids
   bastion_security_group_ids     = module.network.bastion_security_group_ids
   lb_security_group_ids          = module.network.lb_security_group_ids
+  environment                    = var.environment
 }

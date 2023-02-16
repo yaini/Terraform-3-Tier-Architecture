@@ -10,5 +10,10 @@ resource "aws_db_instance" "rds" {
   skip_final_snapshot    = true
   vpc_security_group_ids = var.security_group_ids
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-rds"
+    }
+  )
 }

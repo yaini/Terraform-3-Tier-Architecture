@@ -7,7 +7,12 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   requires_compatibilities = ["FARGATE"]
   container_definitions    = jsonencode([local.container_definition])
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-ecs-task-definition"
+    }
+  )
 }
 
 resource "aws_ecs_cluster" "ecs_cluster" {
@@ -35,5 +40,10 @@ resource "aws_ecs_service" "ecs_service" {
 
   depends_on = [aws_lb_listener.alb_listener, aws_iam_role_policy_attachment.ecs_task_execution_role]
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-ecs-service"
+    }
+  )
 }

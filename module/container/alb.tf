@@ -4,7 +4,12 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_security_group.id]
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-alb"
+    }
+  )
 }
 
 resource "aws_lb_listener" "alb_listener" {
@@ -17,7 +22,12 @@ resource "aws_lb_listener" "alb_listener" {
     target_group_arn = aws_lb_target_group.alb_target_group.arn
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-alb-listener"
+    }
+  )
 }
 
 resource "aws_lb_target_group" "alb_target_group" {

@@ -6,7 +6,12 @@ resource "aws_launch_template" "bastion" {
   vpc_security_group_ids = var.bastion_security_group_ids
   key_name               = local.ec2_key_pair_name
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-bastion"
+    }
+  )
 }
 
 resource "aws_launch_template" "application" {
@@ -17,7 +22,12 @@ resource "aws_launch_template" "application" {
   key_name               = local.ec2_key_pair_name
   user_data              = filebase64("./script/install_apache.sh")
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-application"
+    }
+  )
 }
 
 # auto scaling group

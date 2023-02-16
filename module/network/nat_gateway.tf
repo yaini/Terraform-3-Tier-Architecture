@@ -14,5 +14,10 @@ resource "aws_nat_gateway" "nat_gateway" {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-nat-gateway"
+    }
+  )
 }

@@ -5,5 +5,10 @@ resource "aws_internet_gateway" "internet_gateway" {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-internet-gateway"
+    }
+  )
 }

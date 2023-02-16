@@ -2,7 +2,12 @@
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-route-table-public"
+    }
+  )
 }
 
 resource "aws_route" "public_route" {
@@ -21,7 +26,12 @@ resource "aws_route_table_association" "public_route_table_associations" {
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-route-table-private"
+    }
+  )
 }
 
 resource "aws_route" "private_route" {

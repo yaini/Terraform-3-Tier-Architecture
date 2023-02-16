@@ -8,7 +8,12 @@ resource "aws_lb" "application_loadbalancer" {
     aws_autoscaling_group.autoscaling_group_application
   ]
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-lb"
+    }
+  )
 }
 
 resource "aws_lb_target_group" "application_loadbalancer_target_group" {
@@ -21,7 +26,12 @@ resource "aws_lb_target_group" "application_loadbalancer_target_group" {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-lb-target-group"
+    }
+  )
 }
 
 resource "aws_lb_listener" "application_loadbalancer_listener" {
@@ -34,5 +44,10 @@ resource "aws_lb_listener" "application_loadbalancer_listener" {
     target_group_arn = aws_lb_target_group.application_loadbalancer_target_group.arn
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-lb-listener"
+    }
+  )
 }

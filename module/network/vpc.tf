@@ -9,5 +9,10 @@ resource "aws_vpc" "vpc" {
     create_before_destroy = true
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "name" = "${var.environment}-vpc"
+    }
+  )
 }

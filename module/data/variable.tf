@@ -7,3 +7,5 @@ variable "tags" {
     method = "terraform"
   }
 }
+
+variable "environment" {}
