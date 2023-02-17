@@ -43,6 +43,14 @@ $ aws ec2 create-key-pair --key-name key_pair --query 'KeyMaterial' --output tex
 $ chmod 400 ~/.ssh/key_pair.pem
 ```
 
+### Create Terraform Backend
+```bash
+$ cd backend
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
+
 ### Apply
 ```bash
 $ cd dev
